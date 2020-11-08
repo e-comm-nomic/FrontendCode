@@ -13,8 +13,8 @@ import signup from './components/auth/signup';
 const img = require('./foodimage.jpg');
 
 const divStyle = {
-  width: '100%',
-  height: '120%',
+  width: '100vw',
+  height: '100vh',
   backgroundImage: `url(${img})`,
   backgroundSize: '1920px 1280px',
   backgroundRepeat: 'no-repeat',
@@ -31,6 +31,7 @@ function App() {
             <Route exact path='/' component={Home} />
             <Route exact path='/about' component={About} />
             <Route path='/products' component={Products} />
+
             <Route path='/addProduct' component={AddProduct} />
             <Route path='/signin' component={signin} />
             <Route path='/signup' component={signup} />

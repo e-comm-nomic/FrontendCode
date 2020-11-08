@@ -71,7 +71,7 @@ export const NavigationBar = () => (
           <Nav.Item><Nav.Link href="/contact">Contact Us</Nav.Link></Nav.Item>
           <Nav.Item><Nav.Link href="/addProduct">Add Product</Nav.Link></Nav.Item>
           </Nav>
-          <Nav class="navbar-style">
+          <Nav className="navbar-style">
             <Nav.Item><Nav.Link href="/signin">SignIn</Nav.Link></Nav.Item>
             <Nav.Item><Nav.Link href="/signup">SignUp</Nav.Link></Nav.Item>
           </Nav>

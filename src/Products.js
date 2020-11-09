@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import { Cart } from './components/Product/Cart';
 import Axios from 'axios';
 import styled from 'styled-components';
 import './Products.css';
@@ -26,13 +27,34 @@ const searchBarStyle = {
 
 export const Products = () => {
   const [productList, setProductList] = useState([]);
+  const [cartList, setCartList] = useState([]);
+  // console.log('items in cart = ' + cartList.length);
   let history = useHistory();
+
   useEffect(() => {
     Axios.get('http://localhost:3001/products/').then((response) => {
       console.log(response.data);
       setProductList(response.data);
     });
   }, []);
+
+  const deleteProduct = (id) => {
+    Axios.delete(`http://localhost:3001/products/${id}`).then((response) => {
+      window.location.pathname = '/products';
+    });
+  };
+
+  const addToCart = (val) => {
+    Axios.post(`http://localhost:3001/cart/`, {
+      product_id: val.product_id,
+      product_name: val.product_name,
+      price: val.price,
+      imageurl: val.imageurl,
+    }).then((response) => {
+      console.log('successfully added to the cart');
+    });
+  };
+
   return (
     <div>
       <div style={searchBarStyle}>
@@ -61,6 +83,7 @@ export const Products = () => {
                     <div className='overflow'>
                       <img src={val.imageurl} alt='card-image' />
                     </div>
+
                     <div
                       className='card-body text-white'
                       style={{ backgroundColor: '#394142' }}
@@ -70,8 +93,19 @@ export const Products = () => {
                         {val.description}
                       </p>
                       <h4>Rs {val.price}</h4>
-                      <button className='btn btn-outline-success'>
+                      <button
+                        className='btn btn-outline-success'
+                        onClick={() => addToCart(val)}
+                      >
                         Add to Cart
+                      </button>
+                      <button
+                        className='btn btn-outline-danger'
+                        onClick={() => {
+                          deleteProduct(val.product_id);
+                        }}
+                      >
+                        Delete Product
                       </button>
                     </div>
                   </div>

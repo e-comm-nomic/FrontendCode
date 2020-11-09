@@ -7,9 +7,10 @@ import { Home } from './Home';
 import { About } from './About';
 import { Products } from './Products';
 import { AddProduct } from './components/Admin/AddProduct';
+import { Cart } from './components/Product/Cart';
+import { Order } from './components/auth/Order';
 import signin from './components/auth/signin';
 import signup from './components/auth/signup';
-
 const img = require('./foodimage.jpg');
 
 const divStyle = {
@@ -35,6 +36,8 @@ function App() {
             <Route path='/addProduct' component={AddProduct} />
             <Route path='/signin' component={signin} />
             <Route path='/signup' component={signup} />
+            <Route path='/cart' component={Cart} />
+            <Route path='/orders' component={Order} />
           </Switch>
         </Router>
       </React.Fragment>

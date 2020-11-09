@@ -1,0 +1,10 @@
+.detContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #40464c;
+  margin-left: 1px;
+}
+.detContainer button {
+  margin-top: 140px;
+}

@@ -11,20 +11,21 @@ import { Cart } from './components/Product/Cart';
 import { Order } from './components/auth/Order';
 import signin from './components/auth/signin';
 import signup from './components/auth/signup';
+import { UpdateProduct } from './components/Admin/UpdateProduct';
 const img = require('./foodimage.jpg');
 
-const divStyle = {
-  width: '100vw',
-  height: '100vh',
-  backgroundImage: `url(${img})`,
-  backgroundSize: '1920px 1280px',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'relative',
-};
+// const divStyle = {
+//   width: '100vw',
+//   height: '100vh',
+//   backgroundImage: `url(${img})`,
+//   backgroundSize: '1920px 1280px',
+//   backgroundRepeat: 'no-repeat',
+//   backgroundPosition: 'relative',
+// };
 
 function App() {
   return (
-    <div style={divStyle}>
+    <div style={{ backgroundColor: 'black', height: '100%' }}>
       <React.Fragment>
         <Router>
           <NavigationBar />
@@ -34,6 +35,7 @@ function App() {
             <Route path='/products' component={Products} />
 
             <Route path='/addProduct' component={AddProduct} />
+            <Route path='/updateProduct' component={UpdateProduct} />
             <Route path='/signin' component={signin} />
             <Route path='/signup' component={signup} />
             <Route path='/cart' component={Cart} />

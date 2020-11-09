@@ -27,8 +27,7 @@ const searchBarStyle = {
 
 export const Products = () => {
   const [productList, setProductList] = useState([]);
-  const [cartList, setCartList] = useState([]);
-  // console.log('items in cart = ' + cartList.length);
+ 
   let history = useHistory();
 
   useEffect(() => {
@@ -58,7 +57,7 @@ export const Products = () => {
   return (
     <div>
       <div style={searchBarStyle}>
-        <MDBCol md='6'>
+        {/* <MDBCol md='6'>
           <form className='form-inline mt-4 mb-4'>
             <MDBIcon icon='search' />
             <input
@@ -68,7 +67,7 @@ export const Products = () => {
               aria-label='Search'
             />
           </form>
-        </MDBCol>
+        </MDBCol> */}
       </div>
       <div className='product-imagestyle'>
         <div className='container-fluid d-flex justify-content-center'>
@@ -107,6 +106,15 @@ export const Products = () => {
                       >
                         Delete Product
                       </button>
+                      <button
+                        className='btn btn-outline-warning'
+                        onClick={() => {
+                          localStorage.setItem('id', val.product_id);
+                          window.location.pathname = '/updateProduct';
+                        }}
+                      >
+                        Update Product
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -115,6 +123,24 @@ export const Products = () => {
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

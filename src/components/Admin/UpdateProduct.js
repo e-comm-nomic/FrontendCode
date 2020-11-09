@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { Container } from 'react-bootstrap';
 
-export const AddProduct = () => {
+export const UpdateProduct = () => {
   const [productName, setProductName] = useState('');
-  const [productPrice, setProductPrice] = useState(0);
+  const [productPrice, setProductPrice] = useState('');
+  const [productStock, setProductStock] = useState('');
   const [productDesc, setProductDesc] = useState('');
-  const [productStock, setProductStock] = useState(0);
   const [productImage, setProductImage] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [productId, setProductId] = useState(localStorage.getItem('id'));
+  const [product, setProduct] = useState([]);
 
+  useEffect(() => {
+    Axios.get(`http://localhost:3001/products/${productId}`).then(
+      (response) => {
+        setProductName(response.data[0].product_name);
+        setProductPrice(response.data[0].price);
+        setProductDesc(response.data[0].description);
+        setProductStock(response.data[0].stock);
+        setImageUrl(response.data[0].imageurl);
+      }
+    );
+  }, []);
+  console.log(product);
   const uploadImage = () => {
     const formData = new FormData();
     formData.append('file', productImage);
@@ -26,14 +40,16 @@ export const AddProduct = () => {
       console.log('success');
     });
   };
+
   const onSubmit = () => {
-    Axios.post('http://localhost:3001/products/', {
+    Axios.put(`http://localhost:3001/products/${productId}`, {
       productName,
       productPrice,
       productDesc,
       productStock,
       imageUrl,
     }).then(() => {
+      localStorage.clear();
       window.location.pathname = '/products';
     });
   };
@@ -42,7 +58,7 @@ export const AddProduct = () => {
       <ToastContainer position='top-center' />
       <Container className='AddProduct'>
         <form onSubmit={onSubmit} className='btn btn-block btn-dark '>
-          <h2 className='text-success'>Add a product</h2>
+          <h2 className='text-success'>Update a product</h2>
           <div className='form-group'>
             <label className='btn btn-block btn-dark '>
               Image :
@@ -66,6 +82,7 @@ export const AddProduct = () => {
             <input
               className='form-control'
               placeholder='Name'
+              defaultValue={productName}
               name='poduct_name'
               onChange={(e) => {
                 setProductName(e.target.value);
@@ -75,6 +92,7 @@ export const AddProduct = () => {
           <div className='form-group'>
             <textarea
               className='form-control'
+              defaultValue={productDesc}
               placeholder='Description'
               onChange={(e) => {
                 setProductDesc(e.target.value);
@@ -83,10 +101,9 @@ export const AddProduct = () => {
           </div>
           <div className='form-group'>
             <input
-              type='number'
               className='form-control'
               placeholder='Price'
-              name='price'
+              defaultValue={productPrice}
               onChange={(e) => {
                 setProductPrice(e.target.value);
               }}
@@ -94,8 +111,8 @@ export const AddProduct = () => {
           </div>
           <div className='form-group'>
             <input
-              type='number'
               className='form-control'
+              defaultValue={productStock}
               placeholder='Stock'
               onChange={(e) => {
                 setProductStock(e.target.value);
@@ -104,27 +121,27 @@ export const AddProduct = () => {
           </div>
 
           <button type='submit' className='btn btn-success'>
-            Create Product
+            Update product
           </button>
         </form>
       </Container>
       <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

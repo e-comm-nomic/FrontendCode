@@ -8,9 +8,11 @@ export const Cart = () => {
     name: 'Assk Product',
   });
   const [cartList, setCartList] = useState([]);
+  const [total, setTotal] = useState(0);
   useEffect(() => {
     Axios.get('http://localhost:3001/cart/').then((response) => {
       setCartList(response.data);
+      setTotal(total + response.data[0].price);
     });
   }, []);
 
@@ -43,7 +45,6 @@ export const Cart = () => {
       window.location.pathname = '/cart';
     });
   };
-
   return (
     <div>
       <div className='row'>
@@ -85,7 +86,8 @@ export const Cart = () => {
         </div>
         <div className='col-md-4 detContainer'>
           <h3 className='text-success'>Cart Details</h3>
-          <h3>Quantity: {cartList.length}</h3>
+          <h4 className='text-white'>Quantity: {cartList.length}</h4>
+          <h4 className='text-white'>Total: {total}</h4>
           <StripeCheckout
             stripeKey='pk_test_51HlWbbJEXG38mpDmDT5F4JdHjrh1Av4J2GTKpzKPG1tsrrlK3ISEzCC1GYzAmZ0Jb3g3kSQjnBqJxKhDuhFdXnkH00WgC6JaJz'
             token={makePayment}
@@ -94,6 +96,24 @@ export const Cart = () => {
           </StripeCheckout>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

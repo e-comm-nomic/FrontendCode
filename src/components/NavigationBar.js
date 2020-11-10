@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import styled from 'styled-components';
 
@@ -58,8 +59,9 @@ const Styles = styled.div`
     color: rgb(255, 255, 255);
   }
 `;
-export const NavigationBar = () => (
-  <Styles>
+export const NavigationBar = () => {
+  return(
+    <Styles>
     <Navbar bg='dark' expand='lg'>
       <Navbar.Brand href='/'>
         <div style={divStyle1}></div>
@@ -89,6 +91,9 @@ export const NavigationBar = () => (
             <Nav.Link href='/addProduct'>Add Product</Nav.Link>
           </Nav.Item>
           <Nav.Item>
+            <Nav.Link href='/addHotel'>Add Hotel</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
             <Nav.Link href='/cart'>Cart</Nav.Link>
           </Nav.Item>
         </Nav>
@@ -103,4 +108,6 @@ export const NavigationBar = () => (
       </Navbar.Collapse>
     </Navbar>
   </Styles>
-);
+  )
+ 
+}

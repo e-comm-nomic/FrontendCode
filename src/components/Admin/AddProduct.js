@@ -11,6 +11,7 @@ export const AddProduct = () => {
   const [productDesc, setProductDesc] = useState('');
   const [productStock, setProductStock] = useState(0);
   const [productImage, setProductImage] = useState('');
+  const [productHotelName, setProductHotelName] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
   const uploadImage = () => {
@@ -33,6 +34,7 @@ export const AddProduct = () => {
       productDesc,
       productStock,
       imageUrl,
+      productHotelName,
     }).then(() => {
       window.location.pathname = '/products';
     });
@@ -102,29 +104,38 @@ export const AddProduct = () => {
               }}
             />
           </div>
-
+          <div className='form-group'>
+            <input
+              className='form-control'
+              placeholder='Hotel Name'
+              name='hotel_name'
+              onChange={(e) => {
+                setProductHotelName(e.target.value);
+              }}
+            />
+          </div>
           <button type='submit' className='btn btn-success'>
             Create Product
           </button>
         </form>
       </Container>
       <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

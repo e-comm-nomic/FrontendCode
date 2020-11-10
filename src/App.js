@@ -9,6 +9,8 @@ import { Products } from './Products';
 import { AddProduct } from './components/Admin/AddProduct';
 import { Cart } from './components/Product/Cart';
 import { Order } from './components/auth/Order';
+import { AddHotel } from './components/Admin/AddHotel';
+import { UpdateHotel } from './components/Admin/UpdateHotel';
 import signin from './components/auth/signin';
 import signup from './components/auth/signup';
 import { UpdateProduct } from './components/Admin/UpdateProduct';
@@ -36,6 +38,8 @@ function App() {
 
             <Route path='/addProduct' component={AddProduct} />
             <Route path='/updateProduct' component={UpdateProduct} />
+            <Route path='/addHotel' component={AddHotel} />
+            <Route path='/updateProduct' component={UpdateHotel} />
             <Route path='/signin' component={signin} />
             <Route path='/signup' component={signup} />
             <Route path='/cart' component={Cart} />

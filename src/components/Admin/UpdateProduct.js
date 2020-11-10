@@ -12,6 +12,7 @@ export const UpdateProduct = () => {
   const [productDesc, setProductDesc] = useState('');
   const [productImage, setProductImage] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [productHotelName, setProductHotelName] = useState('');
   const [productId, setProductId] = useState(localStorage.getItem('id'));
   const [product, setProduct] = useState([]);
 
@@ -22,6 +23,7 @@ export const UpdateProduct = () => {
         setProductPrice(response.data[0].price);
         setProductDesc(response.data[0].description);
         setProductStock(response.data[0].stock);
+        setProductHotelName(response.data[0].hotel_name);
         setImageUrl(response.data[0].imageurl);
       }
     );
@@ -48,6 +50,7 @@ export const UpdateProduct = () => {
       productDesc,
       productStock,
       imageUrl,
+      productHotelName,
     }).then(() => {
       localStorage.clear();
       window.location.pathname = '/products';
@@ -116,6 +119,17 @@ export const UpdateProduct = () => {
               placeholder='Stock'
               onChange={(e) => {
                 setProductStock(e.target.value);
+              }}
+            />
+          </div>
+          <div className='form-group'>
+            <input
+              className='form-control'
+              placeholder='Name'
+              defaultValue={productHotelName}
+              name='hotel_name'
+              onChange={(e) => {
+                setProductHotelName(e.target.value);
               }}
             />
           </div>

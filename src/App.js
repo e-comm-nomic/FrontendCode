@@ -14,6 +14,8 @@ import { UpdateHotel } from './components/Admin/UpdateHotel';
 import signin from './components/auth/signin';
 import signup from './components/auth/signup';
 import { UpdateProduct } from './components/Admin/UpdateProduct';
+import { Hotels } from './Hotels';
+import { ViewProduct } from './components/Product/ViewProduct';
 const img = require('./foodimage.jpg');
 
 // const divStyle = {
@@ -27,7 +29,7 @@ const img = require('./foodimage.jpg');
 
 function App() {
   return (
-    <div style={{ backgroundColor: 'black', height: '100%' }}>
+    <div style={{ height: '100%', backgroundColor: 'white' }}>
       <React.Fragment>
         <Router>
           <NavigationBar />
@@ -35,11 +37,13 @@ function App() {
             <Route exact path='/' component={Home} />
             <Route exact path='/about' component={About} />
             <Route path='/products' component={Products} />
-
+            <Route path='/hotels' component={Hotels} />
             <Route path='/addProduct' component={AddProduct} />
             <Route path='/updateProduct' component={UpdateProduct} />
             <Route path='/addHotel' component={AddHotel} />
-            <Route path='/updateProduct' component={UpdateHotel} />
+            <Route path='/updateHotel' component={UpdateHotel} />
+            <Route path='/viewProducts' component={ViewProduct} />
+            {/* <Route path='/updateProduct' component={UpdateHotel} /> */}
             <Route path='/signin' component={signin} />
             <Route path='/signup' component={signup} />
             <Route path='/cart' component={Cart} />

@@ -67,7 +67,9 @@ export const AddProduct = () => {
           <div className='form-group'>
             <input
               className='form-control'
+              type='text'
               placeholder='Name'
+              required='true'
               name='poduct_name'
               onChange={(e) => {
                 setProductName(e.target.value);
@@ -77,6 +79,7 @@ export const AddProduct = () => {
           <div className='form-group'>
             <textarea
               className='form-control'
+              required='true'
               placeholder='Description'
               onChange={(e) => {
                 setProductDesc(e.target.value);
@@ -86,6 +89,7 @@ export const AddProduct = () => {
           <div className='form-group'>
             <input
               type='number'
+              required='true'
               className='form-control'
               placeholder='Price'
               name='price'
@@ -97,6 +101,7 @@ export const AddProduct = () => {
           <div className='form-group'>
             <input
               type='number'
+              required='true'
               className='form-control'
               placeholder='Stock'
               onChange={(e) => {
@@ -107,6 +112,7 @@ export const AddProduct = () => {
           <div className='form-group'>
             <input
               className='form-control'
+              required='true'
               placeholder='Hotel Name'
               name='hotel_name'
               onChange={(e) => {

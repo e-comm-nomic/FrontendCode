@@ -17,16 +17,16 @@ export const UpdateProduct = () => {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/products/${productId}`).then(
-      (response) => {
+    Axios.get(`http://localhost:3001/products/${productId}`)
+      .then((response) => {
         setProductName(response.data[0].product_name);
         setProductPrice(response.data[0].price);
         setProductDesc(response.data[0].description);
         setProductStock(response.data[0].stock);
         setProductHotelName(response.data[0].hotel_name);
         setImageUrl(response.data[0].imageurl);
-      }
-    );
+      })
+      .catch((err) => console.log(err));
   }, []);
   console.log(product);
   const uploadImage = () => {

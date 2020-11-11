@@ -60,54 +60,53 @@ const Styles = styled.div`
   }
 `;
 export const NavigationBar = () => {
-  return(
+  return (
     <Styles>
-    <Navbar bg='dark' expand='lg'>
-      <Navbar.Brand href='/'>
-        <div style={divStyle1}></div>
-        <div>
-          <h3>Food Ordering System </h3>
-        </div>
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
-      <Navbar.Collapse id='basic-navbar-nav'>
-        <Nav className='navbar-mainstyle'>
-          <Nav.Item>
-            <Nav.Link href='/'>Home</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/about'>About</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/products'>Products</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/hotels'>Partner Hotels</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/contact'>Contact Us</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/addProduct'>Add Product</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/addHotel'>Add Hotel</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/cart'>Cart</Nav.Link>
-          </Nav.Item>
-        </Nav>
-        <Nav className='navbar-style'>
-          <Nav.Item>
-            <Nav.Link href='/signin'>SignIn</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/signup'>SignUp</Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  </Styles>
-  )
- 
-}
+      <Navbar bg='dark' expand='lg'>
+        <Navbar.Brand href='/'>
+          <div style={divStyle1}></div>
+          <div>
+            <h3>Food Ordering System </h3>
+          </div>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Collapse id='basic-navbar-nav'>
+          <Nav className='navbar-mainstyle'>
+            <Nav.Item>
+              <Nav.Link href='/'>Home</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href='/about'>About</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href='/products'>Products</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href='/hotels'>Hotels</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href='/contact'>Contact Us</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href='/addProduct'>Add Product</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href='/addHotel'>Add Hotel</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href='/cart'>Cart</Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <Nav className='navbar-style'>
+            <Nav.Item>
+              <Nav.Link href='/signin'>SignIn</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href='/signup'>SignUp</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </Styles>
+  );
+};

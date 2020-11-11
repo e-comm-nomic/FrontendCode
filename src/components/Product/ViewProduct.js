@@ -25,16 +25,23 @@ const searchBarStyle = {
   size: '25px',
 };
 
-export const Products = () => {
+export const ViewProduct = () => {
   const [productList, setProductList] = useState([]);
-
-  let history = useHistory();
-
+  const [hotelList, setHotelList] = useState([]);
+  const [hotelName, setHotelName] = useState(
+    localStorage.getItem('hotel_name')
+  );
+  console.log(hotelName);
   useEffect(() => {
-    Axios.get('http://localhost:3001/products/').then((response) => {
-      console.log(response.data);
-      setProductList(response.data);
-    });
+    Axios.get(`http://localhost:3001/hotels/${hotelName}`)
+      .then((response) => {
+        console.log(response.data);
+        setProductList(response.data[0]);
+        setHotelList(response.data[1]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const deleteProduct = (id) => {
@@ -56,6 +63,22 @@ export const Products = () => {
 
   return (
     <div>
+      <div
+        className='lead font-weight-normal text-wrap text-white text-center rounded'
+        style={{ backgroundColor: '#298a91' }}
+      >
+        <p>Items from Hotel {hotelName}</p>
+        {hotelList.map((val, key) => {
+          return (
+            <div>
+              <p>Rating : {val.hotel_rating}</p>
+              <p>Place : {val.place}</p>
+              <p>Contact No : {val.contact_no}</p>
+            </div>
+          );
+        })}
+      </div>
+
       <div style={searchBarStyle}>
         {/* <MDBCol md='6'>
           <form className='form-inline mt-4 mb-4'>
@@ -69,18 +92,15 @@ export const Products = () => {
           </form>
         </MDBCol> */}
       </div>
-      <div>
+      <div className='product-imagestyle'>
         <div className='container-fluid d-flex justify-content-center'>
           <div className='row'>
             {productList.map((val, key) => {
               return (
                 <div className='col-md-3 col-sm-1 d-flex align-items-stretch'>
-                  <div className='card text-white bg-light border border-info '>
+                  <div className='card text-white bg-dark border border-info '>
                     <p className='lead bg-success font-weight-normal text-wrap text-center rounded'>
                       {val.product_name}
-                    </p>
-                    <p className='text-success text-center'>
-                      hotel: {val.hotel_name}
                     </p>
                     <div className='card-body' style={{ maxHeight: '100%' }}>
                       <div className='overflow'>

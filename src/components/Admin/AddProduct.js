@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { Container } from 'react-bootstrap';
 
@@ -22,10 +23,14 @@ export const AddProduct = () => {
     Axios.post(
       'https://api.cloudinary.com/v1_1/dos8pkay6/image/upload',
       formData
-    ).then((response) => {
-      setImageUrl(response.data.url);
-      console.log('success');
-    });
+    )
+      .then((response) => {
+        setImageUrl(response.data.url);
+        console.log('success');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const onSubmit = () => {
     Axios.post('http://localhost:3001/products/', {
@@ -35,9 +40,13 @@ export const AddProduct = () => {
       productStock,
       imageUrl,
       productHotelName,
-    }).then(() => {
-      window.location.pathname = '/products';
-    });
+    })
+      .then(() => {
+        window.location.pathname = '/products';
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className='App'>

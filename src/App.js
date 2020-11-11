@@ -12,7 +12,7 @@ import { Order } from './components/auth/Order';
 import { AddHotel } from './components/Admin/AddHotel';
 import { UpdateHotel } from './components/Admin/UpdateHotel';
 import signin from './components/auth/signin';
-import signup from './components/auth/signup';
+import signup from './components/auth/Signup';
 import { UpdateProduct } from './components/Admin/UpdateProduct';
 import { Hotels } from './Hotels';
 import { ViewProduct } from './components/Product/ViewProduct';

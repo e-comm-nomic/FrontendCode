@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 // import { Cart } from './components/Product/Cart';
 import Axios from 'axios';
 import styled from 'styled-components';
@@ -49,13 +51,18 @@ export const Products = () => {
       product_name: val.product_name,
       price: val.price,
       imageurl: val.imageurl,
-    }).then((response) => {
-      console.log('successfully added to the cart');
-    });
+    })
+      .then((response) => {
+        toast('Added to the cart', { type: 'success' });
+      })
+      .catch((err) => {
+        toast('Already added to the cart', { type: 'warning' });
+      });
   };
 
   return (
     <div>
+      <ToastContainer position='top-center' />
       <div style={searchBarStyle}>
         {/* <MDBCol md='6'>
           <form className='form-inline mt-4 mb-4'>
@@ -71,64 +78,72 @@ export const Products = () => {
       </div>
       <div>
         <div className='container-fluid d-flex justify-content-center'>
-          <div className='row'>
-            {productList.map((val, key) => {
-              return (
-                <div className='col-md-3 col-sm-1 d-flex align-items-stretch'>
-                  <div className='card text-white bg-light border border-info '>
-                    <p className='lead bg-success font-weight-normal text-wrap text-center rounded'>
-                      {val.product_name}
-                    </p>
-                    <p className='text-success text-center'>
-                      hotel: {val.hotel_name}
-                    </p>
-                    <div className='card-body' style={{ maxHeight: '100%' }}>
-                      <div className='overflow'>
-                        <img
-                          src={val.imageurl}
-                          alt='card-image'
-                          className='mb-3 rounded'
-                        />
-                      </div>
-                      <div style={{ marginLeft: '89px' }}>
-                        <h1 className='btn btn-success rounded  btn-sm px-4 text-center'>
-                          Rs {val.price}
-                        </h1>
-                      </div>
+          <table className='table'>
+            <thead className='thead-dark'>
+              <tr>
+                <th scope='col'></th>
+                <th scope='col'>Name</th>
+                <th scope='col'>Description</th>
+                <th scope='col'>Hotel</th>
+                <th scope='col'>Price</th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {productList.map((val, key) => {
+                return (
+                  <tr key={key} style={{ height: '3px' }}>
+                    <td>
+                      <img
+                        src={val.imageurl}
+                        alt=''
+                        style={{ height: '130px', width: '130px' }}
+                      />
+                    </td>
+                    <td>{val.product_name}</td>
+                    <td>{val.description}</td>
+                    <td>{val.hotel_name}</td>
+                    <td>Rs {val.price}</td>
+                    <td>
+                      <button
+                        className='btn btn-success'
+                        style={{ height: '35px', width: '100px' }}
+                        onClick={() => addToCart(val)}
+                      >
+                        Add
+                      </button>
+                    </td>
 
-                      <div className='row'>
-                        <div className='col-12'>
-                          <button
-                            className='btn btn-outline-success'
-                            onClick={() => addToCart(val)}
-                          >
-                            Add to Cart
-                          </button>
-                          <button
-                            className='btn btn-outline-danger'
-                            onClick={() => {
-                              deleteProduct(val.product_id);
-                            }}
-                          >
-                            Delete Product
-                          </button>
-                          <button
-                            className='btn btn-outline-warning'
-                            onClick={() => {
-                              localStorage.setItem('id', val.product_id);
-                              window.location.pathname = '/updateProduct';
-                            }}
-                          >
-                            Update Product
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                    <td>
+                      <button
+                        className='btn btn-warning'
+                        style={{ height: '35px', width: '100px' }}
+                        onClick={() => {
+                          localStorage.setItem('id', val.product_id);
+                          window.location.pathname = '/updateProduct';
+                        }}
+                      >
+                        Update
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className='btn btn-danger'
+                        style={{ height: '35px', width: '100px' }}
+                        onClick={() => {
+                          deleteProduct(val.product_id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
       <br />

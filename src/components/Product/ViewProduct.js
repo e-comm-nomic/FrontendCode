@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 // import { Cart } from './components/Product/Cart';
 import Axios from 'axios';
 import styled from 'styled-components';
@@ -56,28 +58,42 @@ export const ViewProduct = () => {
       product_name: val.product_name,
       price: val.price,
       imageurl: val.imageurl,
-    }).then((response) => {
-      console.log('successfully added to the cart');
-    });
+    })
+      .then((response) => {
+        toast('Added to the cart', { type: 'success' });
+      })
+      .catch((err) => {
+        toast('Already added to the cart', { type: 'warning' });
+      });
   };
 
   return (
     <div>
-      <div
-        className='lead font-weight-normal text-wrap text-white text-center rounded'
-        style={{ backgroundColor: '#298a91' }}
-      >
-        <p>Items from Hotel {hotelName}</p>
-        {hotelList.map((val, key) => {
-          return (
-            <div>
-              <p>Rating : {val.hotel_rating}</p>
-              <p>Place : {val.place}</p>
-              <p>Contact No : {val.contact_no}</p>
-            </div>
-          );
-        })}
-      </div>
+      <ToastContainer position='top-center' />
+      <table className='table'>
+        <thead className='thead-dark'>
+          <tr>
+            <th scope='col'>Hotel_Name</th>
+            <th scope='col'>Place</th>
+            <th scope='col'>Contact_No</th>
+            <th scope='col'>Pincode</th>
+            <th scope='col'>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {hotelList.map((val, key) => {
+            return (
+              <tr key={key} style={{ height: '3px' }}>
+                <th scope='row'>{val.hotel_name}</th>
+                <td>{val.place}</td>
+                <td>{val.contact_no}</td>
+                <td>{val.pincode}</td>
+                <td>{val.hotel_rating} ⭐</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
 
       <div style={searchBarStyle}>
         {/* <MDBCol md='6'>
@@ -92,65 +108,85 @@ export const ViewProduct = () => {
           </form>
         </MDBCol> */}
       </div>
-      <div className='product-imagestyle'>
-        <div className='container-fluid d-flex justify-content-center'>
-          <div className='row'>
-            {productList.map((val, key) => {
-              return (
-                <div className='col-md-3 col-sm-1 d-flex align-items-stretch'>
-                  <div className='card text-white bg-dark border border-info '>
-                    <p className='lead bg-success font-weight-normal text-wrap text-center rounded'>
-                      {val.product_name}
-                    </p>
-                    <div className='card-body' style={{ maxHeight: '100%' }}>
-                      <div className='overflow'>
+      {productList.length === 0 ? (
+        <h1>No items available</h1>
+      ) : (
+        <div className='product-imagestyle'>
+          <div className='btn btn-block btn-success m-2'>
+            <h3 className='text-dark'>Items Available</h3>
+          </div>
+          <div className='container-fluid d-flex justify-content-center'>
+            <table className='table'>
+              <thead className='thead-dark'>
+                <tr>
+                  <th scope='col'>Image</th>
+                  <th scope='col'>Product_Name</th>
+                  <th scope='col'>Description</th>
+                  <th scope='col'>Stock</th>
+                  <th scope='col'>Price</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {productList.map((val, key) => {
+                  return (
+                    <tr key={key} style={{ height: '3px' }}>
+                      <td>
                         <img
                           src={val.imageurl}
-                          alt='card-image'
-                          className='mb-3 rounded'
+                          alt=''
+                          style={{ height: '100px', width: '100px' }}
                         />
-                      </div>
-                      <div style={{ marginLeft: '89px' }}>
-                        <h1 className='btn btn-success rounded  btn-sm px-4 text-center'>
-                          Rs {val.price}
-                        </h1>
-                      </div>
+                      </td>
+                      <td>{val.product_name}</td>
+                      <td>{val.description}</td>
 
-                      <div className='row'>
-                        <div className='col-12'>
-                          <button
-                            className='btn btn-outline-success'
-                            onClick={() => addToCart(val)}
-                          >
-                            Add to Cart
-                          </button>
-                          <button
-                            className='btn btn-outline-danger'
-                            onClick={() => {
-                              deleteProduct(val.product_id);
-                            }}
-                          >
-                            Delete Product
-                          </button>
-                          <button
-                            className='btn btn-outline-warning'
-                            onClick={() => {
-                              localStorage.setItem('id', val.product_id);
-                              window.location.pathname = '/updateProduct';
-                            }}
-                          >
-                            Update Product
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                      <td>{val.stock}</td>
+                      <td>Rs {val.price}</td>
+                      <td>
+                        <button
+                          className='btn btn-success'
+                          style={{ height: '35px', width: '100px' }}
+                          onClick={() => addToCart(val)}
+                        >
+                          Add
+                        </button>
+                      </td>
+
+                      <td>
+                        <button
+                          className='btn btn-warning'
+                          style={{ height: '35px', width: '100px' }}
+                          onClick={() => {
+                            localStorage.setItem('id', val.product_id);
+                            window.location.pathname = '/updateProduct';
+                          }}
+                        >
+                          Update
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className='btn btn-danger'
+                          style={{ height: '35px', width: '100px' }}
+                          onClick={() => {
+                            deleteProduct(val.product_id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
+      )}
+
       <br />
       <br />
       <br />

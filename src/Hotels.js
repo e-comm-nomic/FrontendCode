@@ -15,7 +15,8 @@ const searchBarStyle = {
 
 export const Hotels = () => {
   const [hotelList, setHotelList] = useState([]);
-
+  const [admin, setAdmin] = useState(false);
+  console.log(admin);
   useEffect(() => {
     Axios.get('http://localhost:3001/hotels/').then((response) => {
       console.log(response.data);
@@ -42,6 +43,9 @@ export const Hotels = () => {
         <div className='container-fluid d-flex justify-content-center'>
           <div className='row'>
             <div className='col-md-3'>
+              <button onClick={() => setAdmin(!admin)}>
+                {admin == true ? 'Admin' : 'user'}
+              </button>
               <table className='table'>
                 <thead className='thead-dark'>
                   <tr>
@@ -51,8 +55,9 @@ export const Hotels = () => {
                     <th scope='col'>Pincode</th>
                     <th scope='col'>Rating</th>
                     <th scope='col'>View_Items</th>
-                    <th scope='col'>Update_Hotel</th>
-                    <th scope='col'>Delete_Hotel</th>
+                    {admin && <th scope='col'>Update_Hotel</th>}
+
+                    {admin && <th scope='col'>Delete_Hotel</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -63,7 +68,7 @@ export const Hotels = () => {
                         <td>{val.place}</td>
                         <td>{val.contact_no}</td>
                         <td>{val.pincode}</td>
-                        <td>{val.hotel_rating}</td>
+                        <td>{val.hotel_rating} ⭐</td>
                         <td>
                           <button
                             className='btn btn-success'
@@ -73,28 +78,33 @@ export const Hotels = () => {
                             view items
                           </button>
                         </td>
+
                         <td>
-                          <button
-                            className='btn btn-warning'
-                            style={{ height: '35px', width: '100px' }}
-                            onClick={() => {
-                              localStorage.setItem('id', val.hotel_name);
-                              window.location.pathname = '/updateHotel';
-                            }}
-                          >
-                            Update
-                          </button>
+                          {admin && (
+                            <button
+                              className='btn btn-warning'
+                              style={{ height: '35px', width: '100px' }}
+                              onClick={() => {
+                                localStorage.setItem('id', val.hotel_name);
+                                window.location.pathname = '/updateHotel';
+                              }}
+                            >
+                              Update
+                            </button>
+                          )}
                         </td>
                         <td>
-                          <button
-                            className='btn btn-danger'
-                            style={{ height: '35px', width: '100px' }}
-                            onClick={() => {
-                              deleteHotel(val.hotel_name);
-                            }}
-                          >
-                            Delete
-                          </button>
+                          {admin && (
+                            <button
+                              className='btn btn-danger'
+                              style={{ height: '35px', width: '100px' }}
+                              onClick={() => {
+                                deleteHotel(val.hotel_name);
+                              }}
+                            >
+                              Delete
+                            </button>
+                          )}
                         </td>
                       </tr>
                     );

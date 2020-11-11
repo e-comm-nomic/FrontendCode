@@ -62,7 +62,7 @@ const Styles = styled.div`
 export const NavigationBar = () => {
   return (
     <Styles>
-      <Navbar bg='dark' expand='lg'>
+      <Navbar bg='dark' expand='lg' style={{ height: '100px' }}>
         <Navbar.Brand href='/'>
           <div style={divStyle1}></div>
           <div>
